@@ -16,13 +16,13 @@ class App extends Component {
 
 	componentDidMount() {
 			const savedNotes = JSON.parse(localStorage.getItem('notes'));
-			if (savedNotes[0]) {
+			if (savedNotes && (typeof savedNotes[0] !== "undefined")) {
 				this.setState({
 					notes: savedNotes,
 					renderId: savedNotes[0].id,
 					renderNote: savedNotes[0]
 				});
-			}
+			} 
 		}
 
 
@@ -39,12 +39,14 @@ class App extends Component {
 
 	handleNoteAdd = (newNote) => {
 				this.setState({
-					notes: [newNote, ...this.state.notes]
+					notes: [newNote, ...this.state.notes],
+					renderId: newNote.id
 				});
 		}
 
-	handleNoteDelete = (note) => {
-			let newNotes = this.state.notes.filter(function(el) { return el.id != note.id; }); 
+	handleNoteDelete = () => {
+			let deleteId = this.state.renderId;
+			let newNotes = this.state.notes.filter(function(el) { return el.id != deleteId; }); 
 			this.setState({
 				notes: newNotes
 			});
@@ -54,15 +56,16 @@ class App extends Component {
 		let obj = this.state.notes;
 		let renderObj = obj.find(function (key) { return key.id === id; });
 		this.setState({
-					renderNote: renderObj
+					renderNote: renderObj,
+					renderId: id
 			});
 	}
 
 	render() {
-		// console.log(this.state.renderNote);
 		return (
 			<div className="note-app">
-			<NotesList notes={this.state.notes} showFullNote={this.noteShow} onNoteAdd={this.handleNoteAdd}/>
+			<NotesList notes={this.state.notes} showFullNote={this.noteShow} onNoteAdd={this.handleNoteAdd}
+								 activeItemId={this.state.renderId} />
 			<NoteEditor notes={this.state.renderNote} onDelete={this.handleNoteDelete} />
 			</div>
 		);

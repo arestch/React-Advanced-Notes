@@ -14,7 +14,7 @@ class NotesList extends Component {
 	}
 
 	render() {
-		const { notes, showFullNote } = this.props;
+		const { notes, showFullNote, activeItemId } = this.props;
 		return (
 			<div className ="notes-list">
 				<div className="notes-list__header">
@@ -35,6 +35,7 @@ class NotesList extends Component {
 									title={note.title}
 									text={note.text}
 									showNote={showFullNote}
+									active={activeItemId === note.id}
 										/>)
 									}
 				</div>

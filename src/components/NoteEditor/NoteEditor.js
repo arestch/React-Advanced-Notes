@@ -11,7 +11,7 @@ class NoteEditor extends Component {
 				<div className="note-editor__header">
 					<i className="fa fa-info-circle"></i>
 					<i className="fa fa-clock-o"></i>
-					<i className="fa fa-trash-o" onClick={() => onDelete(notes)} ></i>
+					<i className="fa fa-trash-o" onClick={onDelete} ></i>
 					<i className="fa fa-ellipsis-h"></i>
 				</div>
 				<div className="notes-editor__tags">

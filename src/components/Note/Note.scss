@@ -12,6 +12,10 @@
 	cursor: pointer;
 }
 
+.active {
+	background-color: rgba(197,197,197, 0.5);
+}
+
 .notes {
 	height: 80%;
 	overflow-y: auto;
