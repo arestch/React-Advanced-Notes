@@ -12,6 +12,11 @@
 	cursor: pointer;
 }
 
+.notes {
+	height: 80%;
+	overflow-y: auto;
+}
+
 .notes-list__title {
 	margin: 0;
 	padding: 0;
