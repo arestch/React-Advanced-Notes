@@ -10,12 +10,11 @@ class NotesList extends Component {
 				text: 'Note text',
 				id: Date.now()
 		}
-		console.log(this.props);
 		this.props.onNoteAdd(newNote);
 	}
 
 	render() {
-		const { notes } = this.props;
+		const { notes, showFullNote } = this.props;
 		return (
 			<div className ="notes-list">
 				<div className="notes-list__header">
@@ -35,7 +34,9 @@ class NotesList extends Component {
 									id={note.id}
 									title={note.title}
 									text={note.text}
-										/>)}
+									showNote={showFullNote}
+										/>)
+									}
 				</div>
 			</div>
 			);

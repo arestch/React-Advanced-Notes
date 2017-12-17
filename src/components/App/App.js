@@ -8,8 +8,10 @@ class App extends Component {
 	constructor(props) {
 				super(props);
 				this.state = {
-					notes: []
-				};
+					notes: [],
+					renderId: '',
+					renderNote: []
+			};
 		}
 
 	componentDidMount() {
@@ -17,11 +19,13 @@ class App extends Component {
 
 			if (savedNotes) {
 				this.setState({
-					notes: savedNotes
+					notes: savedNotes,
+					renderId: savedNotes[0].id,
+					renderNote: savedNotes[0]
 				});
 			}
 		}
-	
+
 
 	componentDidUpdate(prevProps, prevState) {
 			if (prevState.notes !== this.state.notes) {
@@ -31,21 +35,29 @@ class App extends Component {
 
 	saveToLocalStorage() {
 			const notes = JSON.stringify(this.state.notes);
-			console.log('save');
 			localStorage.setItem('notes', notes);
 		}
 
 	handleNoteAdd = (newNote) => {
-				console.log(123);
 				this.setState({
 					notes: [newNote, ...this.state.notes]
 				});
-		}	
+		}
+
+	noteShow = (id) => {
+		let obj = this.state.notes;
+		let renderObj = obj.find(function (key) { return key.id === id; });
+		this.setState({
+					renderNote: renderObj
+			});
+	}
+
 	render() {
+		// console.log(this.state.renderNote);
 		return (
 			<div className="note-app">
-			<NotesList notes={this.state.notes}  onNoteAdd={this.handleNoteAdd}/>
-			<NoteEditor/>
+			<NotesList notes={this.state.notes} showFullNote={this.noteShow} onNoteAdd={this.handleNoteAdd}/>
+			<NoteEditor notes={this.state.renderNote} />
 			</div>
 		);
 	}

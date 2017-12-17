@@ -13,9 +13,9 @@ class Note extends Component {
 	}
 
 	render() {
-		const { title, text} = this.props;
+		const { title, text, showNote, id} = this.props;
 		return (
-				<div className="notes-list__note">
+				<div className="notes-list__note" onClick={() => showNote(id)} >
 				<h4 className="notes-list__title">{title}</h4>
 					{{text} &&
 					<p className="notes-list__text">{text}</p>}
