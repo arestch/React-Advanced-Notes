@@ -4,24 +4,39 @@ import './NotesList.scss';
 
 class NotesList extends Component {
 
-	render() {
+	handleNoteAdd = (event) => {
+		const newNote =	{
+				title: 'New note',
+				text: 'Note text',
+				id: Date.now()
+		}
+		console.log(this.props);
+		this.props.onNoteAdd(newNote);
+	}
 
+	render() {
+		const { notes } = this.props;
 		return (
 			<div className ="notes-list">
 				<div className="notes-list__header">
 					<form className="notes-list__form">
 					<i className="fa fa-search"></i>
 					<input type="text" className="notes-list__input" />
-					<i className="fa fa-plus"></i>
+					<i className="fa fa-plus" onClick={this.handleNoteAdd}></i>
 					</form>
 				</div>
 				<div className="notes-list__tags">
 					<span className="notes-list__span"> Tags <i className="fa fa-caret-down" aria-hidden="true"></i></span>
 				</div>
-					<Note />
-					<Note />
-					<Note />
-					<Note />
+				<div className="notes" ref={c => this.grid = c}> 
+					{ notes.map(note => 
+							<Note 
+									key={note.id}
+									id={note.id}
+									title={note.title}
+									text={note.text}
+										/>)}
+				</div>
 			</div>
 			);
 	}
