@@ -16,8 +16,7 @@ class App extends Component {
 
 	componentDidMount() {
 			const savedNotes = JSON.parse(localStorage.getItem('notes'));
-
-			if (savedNotes) {
+			if (savedNotes[0]) {
 				this.setState({
 					notes: savedNotes,
 					renderId: savedNotes[0].id,
@@ -44,6 +43,13 @@ class App extends Component {
 				});
 		}
 
+	handleNoteDelete = (note) => {
+			let newNotes = this.state.notes.filter(function(el) { return el.id != note.id; }); 
+			this.setState({
+				notes: newNotes
+			});
+	}
+
 	noteShow = (id) => {
 		let obj = this.state.notes;
 		let renderObj = obj.find(function (key) { return key.id === id; });
@@ -57,7 +63,7 @@ class App extends Component {
 		return (
 			<div className="note-app">
 			<NotesList notes={this.state.notes} showFullNote={this.noteShow} onNoteAdd={this.handleNoteAdd}/>
-			<NoteEditor notes={this.state.renderNote} />
+			<NoteEditor notes={this.state.renderNote} onDelete={this.handleNoteDelete} />
 			</div>
 		);
 	}

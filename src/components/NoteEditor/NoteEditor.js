@@ -5,13 +5,13 @@ import FullNote from '../FullNote/FullNote.js';
 class NoteEditor extends Component {
 
 	render() {
-		const { showId, notes } = this.props;
+		const { showId, notes, onDelete } = this.props;
 		return (
 			<div className="note-editor">
 				<div className="note-editor__header">
 					<i className="fa fa-info-circle"></i>
 					<i className="fa fa-clock-o"></i>
-					<i className="fa fa-trash-o"></i>
+					<i className="fa fa-trash-o" onClick={() => onDelete(notes)} ></i>
 					<i className="fa fa-ellipsis-h"></i>
 				</div>
 				<div className="notes-editor__tags">
