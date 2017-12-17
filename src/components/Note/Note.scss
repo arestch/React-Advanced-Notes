@@ -1,0 +1,26 @@
+.notes-list__note {
+	padding-left: 10%;
+	height: 10%;
+	transition: background 0.25s ease;
+	font-family: 'Titillium Web', sans-serif;
+	&:hover {
+		background-color: rgba(197,197,197, 0.5);
+	}
+	padding-top: 10px;
+	padding-bottom: 15px;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+.notes-list__title {
+	margin: 0;
+	padding: 0;
+}
+
+.notes-list__text {
+	margin: 0;
+	color: #555;
+	font-size: 14px;
+	padding-left: 2%;
+	margin-top: 2%;
+}

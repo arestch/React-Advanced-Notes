@@ -1,0 +1,36 @@
+.note-editor {
+	width: 60%;
+}
+.note-editor__header {
+	height: 7%;
+	& .fa {
+	color: #82a6c5;
+	font-size: 14px;
+	margin-left: 20px;
+	margin-top: 2%;
+	cursor: pointer;
+	}
+	padding-top: 2%;
+	padding-bottom: 2%;
+	border-bottom: 1px solid rgba(197,197,197, 0.5);
+}
+.notes-editor__form {
+	margin-top: 0.8%;
+}
+
+.notes-editor__tags {
+	padding-bottom: 1.8%;
+	border-bottom: 1px solid rgba(197,197,197, 0.5);
+}
+
+.notes-editor__input {
+	width: 95.3%;
+	font-size: 12px;
+	font-weight: 700;
+	padding-left: 20px;
+	border: none;
+	border-left: none;
+	&:focus {
+		outline: none;
+	}
+}

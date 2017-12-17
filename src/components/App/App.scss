@@ -1,0 +1,19 @@
+body, html {
+	margin: 0;
+	width: 100%;
+	padding: 0;
+}
+
+#root {
+	width: 40%;
+	margin-top: 5%;
+	margin-left: 30%;
+	background-color: #fff;
+	height: 50vh;
+	border: 1px solid rgba(197,197,197, 0.6);
+}
+
+.note-app {
+	display: flex;
+	height: 100%;
+}
