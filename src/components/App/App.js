@@ -127,6 +127,7 @@ class App extends Component {
 	}
 
 	openInfo = () => {
+		if(this.state.notes.length < 1) return false;
 		this.setState({
 			infoOpened: true
 		});

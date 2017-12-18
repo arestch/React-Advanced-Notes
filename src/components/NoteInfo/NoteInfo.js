@@ -22,7 +22,6 @@ class NoteInfo extends Component {
 		// const formattedDate = ('0' + dateCreated.getHours()).slice(-2) + ':' + ('0' + dateCreated.getMinutes()).slice(-2);
 		const newdate =  cd.getDate() + "/" + cd.getMonth() + "/" + cd.getFullYear()
 										 + " " + this.addZero(cd.getHours()) + ":" + this.addZero(cd.getMinutes()) + ":" + this.addZero(cd.getSeconds());
-		console.log(note.tags);
 		return (
 				<div className="note-info">
 						<div className="note-info__block">
