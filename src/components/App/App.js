@@ -3,6 +3,7 @@ import './App.scss';
 
 import NotesList from '../NotesList/NotesList';
 import NoteEditor from '../NoteEditor/NoteEditor';
+import NoteInfo from '../NoteInfo/NoteInfo';
 
 class App extends Component {
 	constructor(props) {
@@ -12,7 +13,9 @@ class App extends Component {
 					showNotes: [],
 					renderId: '',
 					renderNote: [],
-					saved: false
+					saved: false,
+					infoOpened: false,
+					tags: []
 			};
 		}
 
@@ -107,12 +110,39 @@ class App extends Component {
 		this.saveToLocalStorage();
 	}
 
+	handleTagAdd = () => {
+		const index = this.state.notes.indexOf(this.state.renderNote);
+		let newNotes = this.state.notes;
+		newNotes[index].tags.push(this._noteEditor.getData());
+		this.setState({
+			notes: newNotes
+		});
+		this.saveToLocalStorage();
+	}
+
+	closeInfo = () => {
+		this.setState({
+			infoOpened: false
+		});
+	}
+
+	openInfo = () => {
+		this.setState({
+			infoOpened: true
+		});
+	}
+
 	render() {
 		return (
 			<div className="note-app">
 			<NotesList notes={this.state.showNotes} showFullNote={this.noteShow} onNoteAdd={this.handleNoteAdd}
 								 activeItemId={this.state.renderId} onSearchChange={this.onSearchChange} />
-			<NoteEditor note={this.state.renderNote} onDelete={this.handleNoteDelete} onTextChange={this.onTextChange} saved={this.state.saved} />
+			<NoteEditor note={this.state.renderNote} onDelete={this.handleNoteDelete} 
+									onTextChange={this.onTextChange} handleTagAdd={this.handleTagAdd} openInfo={this.openInfo}
+									ref={(ref) => this._noteEditor = ref} />
+			{ this.state.infoOpened &&
+			<NoteInfo note={this.state.renderNote} closeInfo={this.closeInfo} />
+			}
 			</div>
 		);
 	}

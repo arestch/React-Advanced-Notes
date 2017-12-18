@@ -39,7 +39,12 @@
 	font-weight: 700;
 	justify-self: left;
 	animation: show 0.25s ease forwards;
-
+	&--error {
+		color: red;
+	}
+	&--tagsaved {
+		color: green;
+	}
 }
 
 .notes-editor__input {

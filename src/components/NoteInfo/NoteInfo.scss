@@ -1,0 +1,69 @@
+.note-info {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(#AAB8C7, 0.7);
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	animation: openinfo 0.5s ease;
+}
+
+.note-info__block {
+	position: relative;
+	margin: auto;
+	font-family: 'Titillium Web', sans-serif;
+	width: 40%;
+	height: 70%;
+	border: 1px solid rgba(197,197,197, 1);
+	background-color: rgba(#fff, 0.8);
+	& .fa-times {
+		color: #000;
+		font-size: 32px;
+		position: absolute;
+		right: 5%;
+		top: 3%;
+		cursor: pointer;
+		transition: opacity 0.25s ease;
+	}
+}
+
+.fa-times:hover {	
+	opacity: 0.6;
+}
+.note-info__span {
+	font-weight: 700;
+	margin-left: 10px;
+}
+.note-info__title {
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-size: 30px;
+	text-align: center;
+	position: relative;
+	top: -25px;
+	&::after {
+		content: "";
+		position: absolute;
+		width: 100%;
+		border-bottom: 1px solid black;
+		top: 50px;
+		right: 0;
+		opacity: 0.5;
+	}
+}
+.note-info__info-block {
+	text-align: left;
+	text-transform: uppercase;
+	margin-top: -30px;
+	margin-left: 5px;
+}
+
+@keyframes openinfo {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}

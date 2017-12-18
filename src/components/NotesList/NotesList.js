@@ -8,7 +8,8 @@ class NotesList extends Component {
 		const newNote =	{
 				title: 'New note',
 				text: 'Note text',
-				id: Date.now()
+				id: Date.now(),
+				tags: []
 		}
 		this.props.onNoteAdd(newNote);
 	}
