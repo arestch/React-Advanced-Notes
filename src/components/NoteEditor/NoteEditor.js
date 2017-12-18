@@ -25,7 +25,7 @@ class NoteEditor extends Component {
 						}
 				</div>
 				<div className="note-editor_full-note">  {
-					note &&
+					note && (Object.keys(note).length > 0) &&
 					<FullNote note={note} onTextChange={onTextChange}/>
 				}
 				</div>
