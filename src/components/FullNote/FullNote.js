@@ -4,32 +4,38 @@ import './FullNote.scss';
 
 class FullNote extends Component {
 	constructor(props) {
-	    super();
-	    console.log(props.text);
-	    this.state = {
-	      text: props.text
+	    super();	    this.state = {
+	      text: props.note.title + "\n" + props.note.text
 	    }
 	  }
+	static propTypes = {
+			id: PropTypes.number.isRequired,
+			title: PropTypes.string.isRequired,
+			text: PropTypes.string,
+			onTextChange: PropTypes.func
+	}	
 
 	componentWillReceiveProps(props) {
 		this.setState({
-			text: props.text
+			text: props.note.title + "\n" + props.note.text
 		});
 	}
-	static propTypes = {
-		id: PropTypes.number.isRequired,
-		title: PropTypes.string.isRequired,
-		text: PropTypes.string
-}	
+	
 
 	handleTextChange = (event) => {
+			if ((event.target.value.length > 30) && !(event.target.value.slice(0, 31).includes('\n'))) {
+					let newValue = event.target.value.slice(0, 30);
+					newValue = newValue + '\n' + event.target.value.slice(30);
+					event.target.value = newValue;
+			}
 	    this.setState({
 	    	text: event.target.value
 	    });
+	    this.props.onTextChange(event.target.value, this.props.note);
 	  }
 
 	render() {
-		const { notes, text } = this.props;
+		const { note, text } = this.props;
 		return (
 				<form>
           <textarea className="note-editor__textarea"

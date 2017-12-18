@@ -16,12 +16,30 @@
 	border-bottom: 1px solid rgba(197,197,197, 0.5);
 }
 .notes-editor__form {
-	margin-top: 0.8%;
+	margin-top: 1.5%;
+	width: 50%;
 }
 
 .notes-editor__tags {
 	padding-bottom: 1.8%;
 	border-bottom: 1px solid rgba(197,197,197, 0.5);
+	display: flex;
+	position: relative;
+}
+
+.notes-editor__saved{
+	color: #555;
+	opacity: 0.6;
+	align-self: flex-end;
+	position: absolute;
+	font-size: 12px;
+	right: 10px;
+	bottom: 25%;
+	font-family: 'Arial', sans-serif;
+	font-weight: 700;
+	justify-self: left;
+	animation: show 0.25s ease forwards;
+
 }
 
 .notes-editor__input {
@@ -33,5 +51,14 @@
 	border-left: none;
 	&:focus {
 		outline: none;
+	}
+}
+
+@keyframes show {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 0.6;
 	}
 }

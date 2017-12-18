@@ -10,7 +10,8 @@ class App extends Component {
 				this.state = {
 					notes: [],
 					renderId: '',
-					renderNote: []
+					renderNote: [],
+					saved: false
 			};
 		}
 
@@ -40,7 +41,8 @@ class App extends Component {
 	handleNoteAdd = (newNote) => {
 				this.setState({
 					notes: [newNote, ...this.state.notes],
-					renderId: newNote.id
+					renderId: newNote.id,
+					renderNote: newNote
 				});
 		}
 
@@ -48,7 +50,8 @@ class App extends Component {
 			let deleteId = this.state.renderId;
 			let newNotes = this.state.notes.filter(function(el) { return el.id != deleteId; }); 
 			this.setState({
-				notes: newNotes
+				notes: newNotes,
+				renderNote: this.state.notes[1]
 			});
 	}
 
@@ -61,12 +64,26 @@ class App extends Component {
 			});
 	}
 
+	onTextChange = (text, changedNote) => {
+		let title = text.split('\n')[0];
+		let newText = text.replace(/.*\n/i, '');
+		let index = this.state.notes.indexOf(changedNote);
+		let newNotes = this.state.notes;
+		newNotes[index].title = title;
+		newNotes[index].text = newText;
+		this.setState({
+			notes: newNotes,
+			saved: true
+		})
+		this.saveToLocalStorage();
+	}
+
 	render() {
 		return (
 			<div className="note-app">
 			<NotesList notes={this.state.notes} showFullNote={this.noteShow} onNoteAdd={this.handleNoteAdd}
 								 activeItemId={this.state.renderId} />
-			<NoteEditor notes={this.state.renderNote} onDelete={this.handleNoteDelete} />
+			<NoteEditor note={this.state.renderNote} onDelete={this.handleNoteDelete} onTextChange={this.onTextChange} saved={this.state.saved} />
 			</div>
 		);
 	}

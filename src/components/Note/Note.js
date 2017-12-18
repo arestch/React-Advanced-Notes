@@ -27,14 +27,16 @@ class Note extends Component {
 
 	render() {
 		const { title, text, showNote, id, active} = this.props;
-		let classes = classnames('notes-list__note', {active: active});
+		let classes = classnames('notes-list__note-wrap', {active: active});
 
 		return (
-				<div className={classes} onClick={this.click} >
+			<div className={classes}>
+				<div className={"notes-list__note"} onClick={this.click} >
 				<h4 className="notes-list__title">{title}</h4>
 					{{text} &&
 					<p className="notes-list__text">{text}</p>}
 				</div>
+			</div>
 			);
 	}
 

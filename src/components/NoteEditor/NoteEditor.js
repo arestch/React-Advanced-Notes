@@ -5,7 +5,7 @@ import FullNote from '../FullNote/FullNote.js';
 class NoteEditor extends Component {
 
 	render() {
-		const { showId, notes, onDelete } = this.props;
+		const { showId, note, onDelete, onTextChange, saved } = this.props;
 		return (
 			<div className="note-editor">
 				<div className="note-editor__header">
@@ -18,10 +18,15 @@ class NoteEditor extends Component {
 						<form className="notes-editor__form">
 							<input type="text" className="notes-editor__input" placeholder="Add tag..." />
 						</form>
+						{
+							saved &&
+							<span className="notes-editor__saved" >Saved</span>
+
+						}
 				</div>
 				<div className="note-editor_full-note">  {
-					notes.text &&
-					<FullNote notes={notes} text={notes.text} />
+					note &&
+					<FullNote note={note} onTextChange={onTextChange}/>
 				}
 				</div>
 			</div>

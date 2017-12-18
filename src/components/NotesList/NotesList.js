@@ -33,7 +33,7 @@ class NotesList extends Component {
 									key={note.id}
 									id={note.id}
 									title={note.title}
-									text={note.text}
+									text={note.text.split('\n')[0]}
 									showNote={showFullNote}
 									active={activeItemId === note.id}
 										/>)
