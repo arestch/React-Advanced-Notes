@@ -4,7 +4,8 @@ import './FullNote.scss';
 
 class FullNote extends Component {
 	constructor(props) {
-	    super();	    this.state = {
+	    super();
+	    this.state = {
 	      text: props.note.title + "\n" + props.note.text
 	    }
 	  }

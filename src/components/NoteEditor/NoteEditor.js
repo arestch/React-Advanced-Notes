@@ -9,6 +9,7 @@ class NoteEditor extends Component {
 			noteSaved: false,
 			tagSaved: false,
 			tagError: false,
+			tagNoNote: false
 		}
 	}
 
@@ -19,11 +20,23 @@ class NoteEditor extends Component {
 	}
 
 	onTagAdd = (e) => {
+		e.preventDefault();
+		if (typeof this.props.note === "undefined" || this.props.note.length == 0) {
+			this.setState({
+			tagError: false,
+			noteSaved: false,
+			tagSaved: false,
+			tagNoNote: true
+			});
+			return false;
+		}
+		
 		if (this.state.text.trim().length < 3) {
-			e.preventDefault();
 			this.setState({
 			tagError: true,
-			noteSaved: false
+			noteSaved: false,
+			tagSaved: false,
+			tagNoNote: false
 			});
 			return false;
 		}
@@ -31,9 +44,9 @@ class NoteEditor extends Component {
 			text: '',
 			tagError: false,
 			tagSaved: true,
-			noteSaved: false
+			noteSaved: false,
+			tagNoNote: false
 		});
-		e.preventDefault();
 		this.props.handleTagAdd();
 	}
 	getData = () => {
@@ -44,6 +57,7 @@ class NoteEditor extends Component {
 			noteSaved: true,
 			tagSaved: false,
 			tagError: false,
+			tagNoNote: false
 		});
 		this.props.onTextChange(event, this.props.note);
 	}
@@ -54,10 +68,8 @@ class NoteEditor extends Component {
 				<div className="note-editor__header">
 					<i className="fa fa-info-circle"
 						onClick={openInfo}></i>
-					<i className="fa fa-clock-o"></i>
 					<i className="fa fa-trash-o"
 					 onClick={onDelete} ></i>
-					<i className="fa fa-ellipsis-h"></i>
 				</div>
 				<div className="notes-editor__tags">
 						<form className="notes-editor__form"
@@ -65,6 +77,10 @@ class NoteEditor extends Component {
 							<input type="text" className="notes-editor__input" 
 							value={this.state.text} onChange={this.inputChange} placeholder="Add tag..."/>
 						</form>
+						{
+							this.state.tagNoNote &&
+							<span className="notes-editor__saved notes-editor__saved--error" >Create a note for adding Tags</span>
+						}
 						{
 							this.state.noteSaved &&
 							<span className="notes-editor__saved" >Note saved</span>

@@ -4,6 +4,13 @@ import './NotesList.scss';
 
 class NotesList extends Component {
 
+	constructor() {
+		super();
+		this.state = {
+			tagsActive: false
+		}
+	}
+
 	handleNoteAdd = (event) => {
 		const newNote =	{
 				title: 'New note',
@@ -14,8 +21,23 @@ class NotesList extends Component {
 		this.props.onNoteAdd(newNote);
 	}
 
+	onTagsClick = () => {
+		const tagsActive = !this.state.tagsActive;
+		this.setState({
+			tagsActive: tagsActive
+		});
+	
+	}
+
+	onTagClick = (tag) => {
+		this.setState({
+			tagsActive: false
+		});
+		this.props.getClickedTag(tag);
+	}
+
 	render() {
-		const { notes, showFullNote, activeItemId, onSearchChange } = this.props;
+		const { notes, showFullNote, activeItemId, onSearchChange, tags } = this.props;
 		return (
 			<div className ="notes-list">
 				<div className="notes-list__header">
@@ -26,8 +48,20 @@ class NotesList extends Component {
 					</form>
 				</div>
 				<div className="notes-list__tags">
-					<span className="notes-list__span"> Tags <i className="fa fa-caret-down" aria-hidden="true"></i></span>
+					<span className="notes-list__span" onClick={this.onTagsClick}> Tags <i className="fa fa-caret-down" aria-hidden="true"></i></span>
 				</div>
+				{ this.state.tagsActive && 
+				<div className="notes-list__tags-list">
+					<ul className="notes-list__list">
+					{
+											tags.map(tag => 
+												<li className="notes-list__item"
+														key={tag}
+														onClick={() => this.onTagClick(tag)} >
+														{tag} </li>)}
+					</ul>
+				</div>
+			}
 				<div className="notes" ref={c => this.grid = c}> 
 					{ notes.map(note => 
 							<Note 
