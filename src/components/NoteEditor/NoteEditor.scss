@@ -8,7 +8,7 @@
 	color: #82a6c5;
 	font-size: 14px;
 	margin-left: 20px;
-	margin-top: 2%;
+	margin-top: 2.8%;
 	cursor: pointer;
 	}
 	padding-top: 2%;
@@ -21,7 +21,8 @@
 }
 
 .notes-editor__tags {
-	padding-bottom: 1%;
+	max-height: 23px;
+	min-height: 23px;
 	border-bottom: 1px solid rgba(197,197,197, 0.5);
 	display: flex;
 	position: relative;
