@@ -42,7 +42,8 @@ class App extends Component {
 				this.setState({
 					notes: [newNote, ...this.state.notes],
 					renderId: newNote.id,
-					renderNote: newNote
+					renderNote: newNote,
+					saved: false
 				});
 		}
 
@@ -51,7 +52,8 @@ class App extends Component {
 			let newNotes = this.state.notes.filter(function(el) { return el.id != deleteId; }); 
 			this.setState({
 				notes: newNotes,
-				renderNote: this.state.notes[1]
+				renderNote: this.state.notes[1],
+				saved: false
 			});
 	}
 
@@ -60,7 +62,8 @@ class App extends Component {
 		let renderObj = obj.find(function (key) { return key.id === id; });
 		this.setState({
 					renderNote: renderObj,
-					renderId: id
+					renderId: id,
+					saved: false
 			});
 	}
 
