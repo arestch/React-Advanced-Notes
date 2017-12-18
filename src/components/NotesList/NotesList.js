@@ -14,13 +14,13 @@ class NotesList extends Component {
 	}
 
 	render() {
-		const { notes, showFullNote, activeItemId } = this.props;
+		const { notes, showFullNote, activeItemId, onSearchChange } = this.props;
 		return (
 			<div className ="notes-list">
 				<div className="notes-list__header">
 					<form className="notes-list__form">
 					<i className="fa fa-search"></i>
-					<input type="text" className="notes-list__input" />
+					<input type="text" className="notes-list__input" onChange={onSearchChange} />
 					<i className="fa fa-plus" onClick={this.handleNoteAdd}></i>
 					</form>
 				</div>

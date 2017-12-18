@@ -9,6 +9,7 @@ class App extends Component {
 				super(props);
 				this.state = {
 					notes: [],
+					showNotes: [],
 					renderId: '',
 					renderNote: [],
 					saved: false
@@ -20,6 +21,7 @@ class App extends Component {
 			if (savedNotes && (typeof savedNotes[0] !== "undefined")) {
 				this.setState({
 					notes: savedNotes,
+					showNotes: savedNotes,
 					renderId: savedNotes[0].id,
 					renderNote: savedNotes[0]
 				});
@@ -41,6 +43,7 @@ class App extends Component {
 	handleNoteAdd = (newNote) => {
 				this.setState({
 					notes: [newNote, ...this.state.notes],
+					showNotes: [newNote, ...this.state.notes],
 					renderId: newNote.id,
 					renderNote: newNote,
 					saved: false
@@ -49,9 +52,15 @@ class App extends Component {
 
 	handleNoteDelete = () => {
 			let deleteId = this.state.renderId;
-			let newNotes = this.state.notes.filter(function(el) { return el.id != deleteId; }); 
+			let newNotes = this.state.notes.filter(function(el) { return el.id != deleteId; });
+			let renderId = '';
+			if (newNotes[0] !== undefined) {
+				renderId = newNotes[0].id;
+			}
 			this.setState({
 				notes: newNotes,
+				showNotes: newNotes,
+				renderId: renderId,
 				renderNote: this.state.notes[1],
 				saved: false
 			});
@@ -67,6 +76,22 @@ class App extends Component {
 			});
 	}
 
+	onSearchChange = (event) => {
+		let notes = this.state.notes;
+		let value = event.target.value.toLowerCase();
+		let newNotes = [];
+		notes.forEach((item, i) => {
+			let conText = item.text.toLowerCase() + item.title.toLowerCase();
+			if (conText.includes(value)) {
+				newNotes.push(item);
+			}
+		})
+		this.setState({
+					showNotes: newNotes,
+					renderNote: newNotes[0]
+		})
+	}
+
 	onTextChange = (text, changedNote) => {
 		let title = text.split('\n')[0];
 		let newText = text.replace(/.*\n/i, '');
@@ -76,6 +101,7 @@ class App extends Component {
 		newNotes[index].text = newText;
 		this.setState({
 			notes: newNotes,
+			showNotes: newNotes,
 			saved: true
 		})
 		this.saveToLocalStorage();
@@ -84,8 +110,8 @@ class App extends Component {
 	render() {
 		return (
 			<div className="note-app">
-			<NotesList notes={this.state.notes} showFullNote={this.noteShow} onNoteAdd={this.handleNoteAdd}
-								 activeItemId={this.state.renderId} />
+			<NotesList notes={this.state.showNotes} showFullNote={this.noteShow} onNoteAdd={this.handleNoteAdd}
+								 activeItemId={this.state.renderId} onSearchChange={this.onSearchChange} />
 			<NoteEditor note={this.state.renderNote} onDelete={this.handleNoteDelete} onTextChange={this.onTextChange} saved={this.state.saved} />
 			</div>
 		);
