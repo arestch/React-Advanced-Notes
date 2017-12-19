@@ -6,7 +6,7 @@ class FullNote extends Component {
 	constructor(props) {
 	    super();
 	    this.state = {
-	      text: props.note.title + "\n" + props.note.text
+	      text: ""
 	    }
 	  }
 	static propTypes = {
@@ -24,6 +24,7 @@ class FullNote extends Component {
 	
 
 	handleTextChange = (event) => {
+			let title = "";
 			if ((event.target.value.length > 30) && !(event.target.value.slice(0, 31).includes('\n'))) {
 					let newValue = event.target.value.slice(0, 30);
 					newValue = newValue + '\n' + event.target.value.slice(30);

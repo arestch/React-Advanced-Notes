@@ -6,7 +6,7 @@ class NoteEditor extends Component {
 		super();
 		this.state = {
 			text: '',
-			noteSaved: false,
+			noteSaved: true,
 			tagSaved: false,
 			tagError: false,
 			tagNoNote: false
@@ -52,14 +52,8 @@ class NoteEditor extends Component {
 	getData = () => {
 		return this.state.text;
 	}
-	noteTextChange = (event) => {
-		this.setState({
-			noteSaved: true,
-			tagSaved: false,
-			tagError: false,
-			tagNoNote: false
-		});
-		this.props.onTextChange(event, this.props.note);
+	noteTextChange = (text, note) => {
+		this.props.onTextChange(text, note);
 	}
 	render() {
 		const { showId, note, onDelete, onTextChange, openInfo } = this.props;
@@ -83,7 +77,7 @@ class NoteEditor extends Component {
 						}
 						{
 							this.state.noteSaved &&
-							<span className="notes-editor__saved" >Note saved</span>
+							<span className="notes-editor__saved" >Autosaving Enabled!</span>
 						}
 						{	
 							this.state.tagSaved &&

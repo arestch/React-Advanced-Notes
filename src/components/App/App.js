@@ -117,18 +117,15 @@ class App extends Component {
 		})
 	}
 
-	onTextChange = (text, changedNote) => {
-		let title = text.split('\n')[0];
-		let newText = text.replace(/.*\n/i, '');
-		let index = this.state.notes.indexOf(changedNote);
+	onTextChange = (text, note) => {
+		let index = this.state.notes.indexOf(note);
+		let splittedString = text.split('\n');
+		let title = splittedString[0];
+		splittedString.shift();
+		let newText = splittedString.join('\n');
 		let newNotes = this.state.notes;
 		newNotes[index].title = title;
 		newNotes[index].text = newText;
-		this.setState({
-			notes: newNotes,
-			showNotes: newNotes,
-			saved: true
-		})
 		this.saveToLocalStorage();
 	}
 
@@ -161,6 +158,16 @@ class App extends Component {
 		});
 	}
 	getClickedTag = (tag) => {
+		if (typeof tag === "undefined") {
+			if (this.state.notes.length === 0) { return false };
+			let notes = this.state.notes;
+			this.setState({
+					showNotes: notes,
+					renderNote: notes[0],
+					renderId: notes[0].id
+		})
+			return false;
+		}
 		let notes = this.state.notes;
 		let newNotes = [];
 		notes.forEach((item, i) => {

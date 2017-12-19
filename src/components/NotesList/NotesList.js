@@ -53,6 +53,10 @@ class NotesList extends Component {
 				{ this.state.tagsActive && 
 				<div className="notes-list__tags-list">
 					<ul className="notes-list__list">
+						<li className="notes-list__item" 
+								onClick={() => this.onTagClick()}>
+							No tags
+						</li>
 					{
 											tags.map(tag => 
 												<li className="notes-list__item"
